@@ -1,4 +1,7 @@
 #include <iostream>
+#include<vector>
+#include<string>
+#include<cctype>
 using namespace std;
 
 int evencount(const int* a, int size) {
@@ -53,9 +56,44 @@ bool is_in(const int*arr1,const int*arr2, int size1,int size2){
     }
 }
 
+void power(double* n, const int* p) {
+    double result= 1.0;
+    for ( int i=0; i<*p; i++) {
+        result *= *n;
+    }
+    cout << " output: "<< result << endl;
+}
+
+vector<int > addOne(vector<int>&v) {
+    int carry = 1 ;
+    for (int i=0; i<v.size(); i++) {
+        int sum = v[i] + carry;
+        v[i]=sum%10;
+        carry = sum/10;
+    }
+    if (carry>0)
+        v.push_back(carry);
+    return v;
+}
+
+string normolize(string s) {
+    if (s.empty()) return s;
+    s[0]=toupper(s[0]);
+    for (int i=1; i<s.size(); i++)
+        s[i]=tolower(s[i]);
+ return s;
+}
+
+int singleNum(vector<int>& vec) {
+    int result = 0;
+    for (int n : vec)
+        result^=n;
+    return result;
+}
+
 int main(){
     // problem 1
-/*
+
     const int Size =10;
     float *ptr, arr[Size];
     ptr= arr;
@@ -129,7 +167,9 @@ int main(){
     cout << endl;
     for (int i = 0; i < size5; i++) cout << arr12[i] << " ";
     cout << endl;
-*/
+
+    // problem 6
+
     int size61, size62;
     cout << "enter 1st size: "; cin >> size61; cout << endl;
     cout << "enter 2nd size: "; cin >> size62; cout << endl;
@@ -149,6 +189,42 @@ int main(){
 
 // problem 7
 
+    double num7; int pow;
+    cout<< "enter the number: "; cin >> num7;
+    cout << endl;
+    cout << "enter power number: "; cin >> pow;
+    cout << endl;
+    cout << " result is: ";
+    power(&num7, &pow);
+
+    // problem 8
+
+    vector<int>v; string input; cout<< "input : "; cin >> input; cout << endl;
+    for (int i = 0 ; i < input.size(); i++)
+        v.push_back(input[input.size()-1-i]);
+    vector<int > result = addOne(v);
+    cout<< "output: ";
+    for (int i= result.size()-1; i>=0; i--)
+        cout << result[i];
+    cout << endl;
+
+    // problem 9
+
+    string inputt;
+    cout << "input: ";
+    cin >> inputt;
+    cout << endl;
+    cout << "output: "<< normolize(inputt) << endl;
+
+    // problem 10
+
+    vector<int> vec;
+    int t;
+    cout << "enter the numbers";
+    while (cin >> t) {
+        vec.push_back(t);
+    }
+    cout << "single number: "<< singleNum(vec) << endl;
 
 return 0;
 }
